@@ -10,10 +10,19 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  const [anchorEL, setAnchorEl] = useState(null);
-  const isOpen = Boolean(anchorEL);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  // const [anchorEl, setAnchorEl] = React.useState(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar
@@ -57,9 +66,9 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               <ArrowDropDownOutlined sx={{ color: theme.palette.secondary[300], fontSize: "25px " }} />
             </Button>
             <Menu
-              anchorEL={anchorEL}
+              anchorEl={anchorEl}
               open={isOpen}
-              onCLose={handleClose}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "center",

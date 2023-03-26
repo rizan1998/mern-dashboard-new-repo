@@ -14,11 +14,7 @@ const Layout = () => {
 
   const userId = useSelector((state) => state.global.userId);
   const { data } = useGetUserQuery(userId);
-  console.log("data", data);
-
-  // last menit 1.53
-  // test change
-  // testing chagen2
+  // console.log("data", data);
 
   return (
     <Box display={isNonMobile ? "flex" : "block"} width="100%" height="100%">
