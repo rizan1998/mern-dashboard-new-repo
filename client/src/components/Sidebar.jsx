@@ -114,7 +114,7 @@ const Sidebar = ({ user, drawerWidth, isSidebarOpen, setIsSidebarOpen, isNonMobi
           }}
         >
           <PerfectScrollbar>
-            <Box width="100%">
+            <Box width="100%" sx={{ mt: "1.4rem" }}>
               <Box m="i.5rem 2rem 2rem 3rem">
                 <FlexBetween color={theme.palette.secondary.main}>
                   <Box display="flex" alignItems="center" gap="0.5rem">

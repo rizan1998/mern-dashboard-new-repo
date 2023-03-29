@@ -4,6 +4,7 @@ import Header from "components/Header";
 import { useGetProductsQuery } from "state/api";
 
 const Product = ({ _id, name, description, price, rating, category, supply, stat }) => {
+  console.log(stat[0].productId);
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -45,8 +46,9 @@ const Product = ({ _id, name, description, price, rating, category, supply, stat
         <CardContent>
           <Typography>id: {_id}</Typography>
           <Typography>Supply Left: {supply}</Typography>
-          <Typography>Yearly Sales This Year: {stat.yearlySalesTotal}</Typography>
-          <Typography>Yearly Units Sold This Year: {stat.yearlyTotalSoldUnits}</Typography>
+          <Typography>Product id: {stat[0].productId}</Typography>
+          <Typography>Yearly Sales This Year: {stat[0].yearlySalesTotal}</Typography>
+          <Typography>Yearly Units Sold This Year: {stat[0].yearlyTotalSoldUnits}</Typography>
         </CardContent>
       </Collapse>
     </Card>
