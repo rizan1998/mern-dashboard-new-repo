@@ -9,6 +9,8 @@ const Customers = () => {
   const { data, isLoading } = useGetCustomersQuery();
   console.log("data", data);
 
+  const VISIBLE_FIELDS = ["name", "rating", "country", "dateCreated", "isAdmin"];
+
   const columns = [
     {
       field: "_id",
@@ -44,7 +46,7 @@ const Customers = () => {
       flex: 1,
     },
     {
-      field: "role",
+      field: "createdAt",
       headerName: "Role",
       flex: 0.5,
     },
