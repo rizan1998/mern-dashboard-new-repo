@@ -33,18 +33,50 @@ export const getCustomers = async (req, res) => {
 };
 
 // serverside pagination
-export const getTransaction = async (req, res) => {
+// export const getTransactions = async (req, res) => {
+//   try {
+//     // sort should look like this: {"field": "userId", "sort": "desc"} and the type is string
+//     const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
+
+//     // formated sort should look like { userId: -1}
+//     const generateSort = () => {
+//       const sortParsed = JSON.parse(sort);
+//       const sortFromatted = {
+//         [sortParsed.field]: (sortParsed.sort = "asc" ? 1 : -1),
+//       };
+//       return sortFromatted;
+//     };
+//     const sortFormatted = Boolean(sort) ? generateSort() : {};
+
+//     const transactions = await Transaction.find({
+//       $or: [{ cost: { $regex: new RegExp(search, "i") } }, { userId: { $regex: new RegExp(search, "i") } }],
+//     })
+//       .sort(sortFormatted)
+//       .skip(page * pageSize)
+//       .limit(pageSize);
+
+//     const total = await Transaction.countDocuments({ name: { $regex: search, $options: "i" } });
+
+//     res.status(200).json({
+//       transactions,
+//       total,
+//     });
+//   } catch (error) {}
+// };
+
+export const getTransactions = async (req, res) => {
   try {
-    // sort should look like this: {"field": "userId", "sort": "desc"} and the type is string
+    // sort should look like this: { "field": "userId", "sort": "desc"}
     const { page = 1, pageSize = 20, sort = null, search = "" } = req.query;
 
-    // formated sort should look like { userId: -1}
+    // formatted sort should look like { userId: -1 }
     const generateSort = () => {
       const sortParsed = JSON.parse(sort);
-      const sortFromatted = {
+      const sortFormatted = {
         [sortParsed.field]: (sortParsed.sort = "asc" ? 1 : -1),
       };
-      return sortFromatted;
+
+      return sortFormatted;
     };
     const sortFormatted = Boolean(sort) ? generateSort() : {};
 
@@ -55,13 +87,15 @@ export const getTransaction = async (req, res) => {
       .skip(page * pageSize)
       .limit(pageSize);
 
-    const total = await Transaction.countDocuments({ name: { $regex: search, $options: "i" } });
-
-    console.log("test");
+    const total = await Transaction.countDocuments({
+      name: { $regex: search, $options: "i" },
+    });
 
     res.status(200).json({
       transactions,
       total,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
