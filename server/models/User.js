@@ -4,14 +4,14 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
       min: 2,
       max: 100,
     },
     email: {
       type: String,
-      require: true,
-      max: 100,
+      required: true,
+      max: 50,
       unique: true,
     },
     password: {
@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema(
     },
     city: String,
     state: String,
-    contry: String,
+    country: String,
     occupation: String,
     phoneNumber: String,
     transactions: Array,
@@ -31,9 +31,7 @@ const UserSchema = new mongoose.Schema(
       default: "admin",
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const User = mongoose.model("User", UserSchema);
